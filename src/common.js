@@ -27,7 +27,6 @@ const createTxOptions = async () => {
   const amount = BigInt(process.argv[5]);
   const fee = BigInt(process.argv[6]);
   const network = process.argv[7];
-  const nonce = BigInt(process.argv[8]);
 
   return {
     recipient,
@@ -37,7 +36,6 @@ const createTxOptions = async () => {
     memo: "test transaction",
     fee,
     anchormode: AnchorMode.Any,
-    nonce,
   };
 };
 

@@ -35,6 +35,4 @@ Enter the command with the following syntax
 
 ### 4. Sponsored transaction
 
-Enter the command with the following syntax
-
-`node tool sponsoredTransaction [recipient address] [sender's private key] [amount] [fee] [network - mainnet | testnet] [sender's nonce] [sponsor's private key] [sponsor's nonce]`
+-
