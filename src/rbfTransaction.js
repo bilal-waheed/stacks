@@ -5,6 +5,7 @@ import {
   addressToString,
 } from "@stacks/transactions";
 
+// Returns StacksTransaction object converted from raw transaction (bytes)
 const getRawTx = async (txid) => {
   const res = await fetch(
     `https://stacks-node-api.testnet.stacks.co/extended/v1/tx/${txid}/raw`
@@ -23,16 +24,19 @@ export const rbfTransaction = async () => {
     recipient: addressToString(transactionData.payload.recipient.address),
     amount: transactionData.payload.amount,
     senderKey: process.argv[4],
-    network: "testnet",
+    network: process.argv[5],
     memo: transactionData.payload.memo.content.split("\x00")[0],
     nonce: transactionData.auth.spendingCondition.nonce,
-    fee: transactionData.auth.spendingCondition.fee + BigInt(process.argv[5]),
+    fee: transactionData.auth.spendingCondition.fee + BigInt(process.argv[6]),
     anchormode: transactionData.anchorMode,
   };
-  console.log(txOptions);
+
   const transaction = await makeSTXTokenTransfer(txOptions);
+
   // serializing the transaction
   const serializedTx = transaction.serialize().toString("hex");
+
+  //converting the string to Uint8Array
   const serArr = Uint8Array.from(serializedTx.split(","));
 
   const response = await broadcastRawTransaction(
@@ -42,5 +46,3 @@ export const rbfTransaction = async () => {
 
   console.log(response);
 };
-
-// example txid -> 0x99c32db5dfc2786e5dfce7a16a532e236c2cb612d3413d2b3eec0cacf6e2e95b

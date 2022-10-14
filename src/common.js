@@ -8,12 +8,15 @@ import {
 } from "@stacks/transactions";
 
 const calcNonce = async () => {
+  const network = process.argv[7];
   const address = await getAddressFromPrivateKey(
     process.argv[4], //senderKey
-    TransactionVersion.Testnet
+    network == "testnet"
+      ? TransactionVersion.Testnet
+      : TransactionVersion.Mainnet
   );
-  const nonceFromAddress = await getNonce(address, "testnet");
-  const nonceFromCLI = process.argv[8];
+  const nonceFromAddress = await getNonce(address, network);
+  const nonceFromCLI = Number(process.argv[8]);
   return [nonceFromCLI, nonceFromAddress];
 };
 

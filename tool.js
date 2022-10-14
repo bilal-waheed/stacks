@@ -1,6 +1,7 @@
-import { stxTokenTransfer } from "./stxTokenTransfer.js";
-import { rbfTransaction } from "./rbfTransaction.js";
-import { dustTransaction } from "./dustTransaction.js";
+import { stxTokenTransfer } from "./src/stxTokenTransfer.js";
+import { rbfTransaction } from "./src/rbfTransaction.js";
+import { dustTransaction } from "./src/dustTransaction.js";
+import { sponsoredTransaction } from "./src/sponsoredTransaction.js";
 
 (async () => {
   const action = process.argv[2];
@@ -16,6 +17,10 @@ import { dustTransaction } from "./dustTransaction.js";
 
     case "dustTransaction":
       dustTransaction();
+      break;
+
+    case "sponsoredTransaction":
+      sponsoredTransaction();
       break;
 
     default:
