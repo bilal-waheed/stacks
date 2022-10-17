@@ -34,13 +34,6 @@ const calcNonce = async () => {
 };
 
 const createTxOptions = async () => {
-  // data from the command line
-  // const recipient = RECIPIENT;
-  // const senderKey = SENDER_KEY;
-  // const amount = AMOUNT;
-  // const fee = FEE;
-  // const network = NETWORK;
-
   return {
     recipient: RECIPIENT,
     amount: AMOUNT,
