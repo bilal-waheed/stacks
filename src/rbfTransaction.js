@@ -1,14 +1,16 @@
 import {
-  broadcastRawTransaction,
   makeSTXTokenTransfer,
   deserializeTransaction,
   addressToString,
 } from "@stacks/transactions";
 
+import { FEE_INCREMENT, NETWORK, SENDER_KEY, TXID } from "./constants.js";
+import { sendRawTransaction } from "./common.js";
+
 // Returns StacksTransaction object converted from raw transaction (bytes)
 const getRawTx = async (txid) => {
   const res = await fetch(
-    `https://stacks-node-api.testnet.stacks.co/extended/v1/tx/${txid}/raw`
+    `https://stacks-node-api.${NETWORK}.stacks.co/extended/v1/tx/${txid}/raw`
   );
 
   const jsonData = await res.json();
@@ -18,16 +20,16 @@ const getRawTx = async (txid) => {
 };
 
 export const rbfTransaction = async () => {
-  const transactionData = await getRawTx(process.argv[3]);
+  const transactionData = await getRawTx(TXID);
 
   const txOptions = {
     recipient: addressToString(transactionData.payload.recipient.address),
     amount: transactionData.payload.amount,
-    senderKey: process.argv[4],
-    network: process.argv[5],
+    senderKey: SENDER_KEY,
+    network: NETWORK,
     memo: transactionData.payload.memo.content.split("\x00")[0],
     nonce: transactionData.auth.spendingCondition.nonce,
-    fee: transactionData.auth.spendingCondition.fee + BigInt(process.argv[6]),
+    fee: transactionData.auth.spendingCondition.fee + BigInt(FEE_INCREMENT),
     anchormode: transactionData.anchorMode,
   };
 
@@ -37,12 +39,10 @@ export const rbfTransaction = async () => {
   const serializedTx = transaction.serialize().toString("hex");
 
   //converting the string to Uint8Array
-  const serArr = Uint8Array.from(serializedTx.split(","));
+  const serializedArray = Uint8Array.from(serializedTx.split(","));
 
-  const response = await broadcastRawTransaction(
-    serArr,
-    "https://stacks-node-api.testnet.stacks.co/v2/transactions"
-  );
+  //sending the raw transaction
+  const rawTxResponse = await sendRawTransaction(serializedArray);
 
-  console.log(response);
+  console.log(rawTxResponse);
 };

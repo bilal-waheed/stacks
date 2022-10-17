@@ -2,11 +2,10 @@ import { stxTokenTransfer } from "./src/stxTokenTransfer.js";
 import { rbfTransaction } from "./src/rbfTransaction.js";
 import { dustTransaction } from "./src/dustTransaction.js";
 import { sponsoredTransaction } from "./src/sponsoredTransaction.js";
+import { CLI_ACTION } from "./src/constants.js";
 
 (async () => {
-  const action = process.argv[2];
-
-  switch (action) {
+  switch (CLI_ACTION) {
     case "stxTokenTransfer":
       stxTokenTransfer();
       break;

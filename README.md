@@ -19,19 +19,19 @@ Make sure you are in the cloned repository before executing any command.
 
 Enter the command with the following syntax
 
-`node tool stxTokenTransfer [recipient address] [sender's private key] [amount] [fee] [network - mainnet | testnet] [nonce]`
+`npm start stxTokenTransfer [network - mainnet | testnet] [recipient address] [sender's private key] [amount] [fee] [nonce]`
 
 ### 2. Replace-by-fee (rbf) transaction
 
 Enter the command with the following syntax
 
-`node tool rbfTransaction [Transaction id (txid)] [sender's private key] [network - mainnet | testnet] [fee amount increment]`
+`npm start rbfTransaction [network - mainnet | testnet] [Transaction id (txid)] [sender's private key] [fee amount increment]`
 
 ### 3. Dust transaction
 
 Enter the command with the following syntax
 
-`node tool dustTransaction [recipient address] [sender's private key] [amount] [fee] [network - mainnet | testnet] [nonce]`
+`npm start dustTransaction [network - mainnet | testnet] [recipient address] [sender's private key] [amount] [fee] [nonce]`
 
 ### 4. Sponsored transaction
 
