@@ -7,6 +7,7 @@ import {
   getNonce,
   TransactionVersion,
 } from "@stacks/transactions";
+
 import {
   AMOUNT,
   NETWORK,
@@ -42,7 +43,7 @@ const createTxOptions = async () => {
     memo: "test transaction",
     fee: FEE,
     anchormode: AnchorMode.Any,
-    nonce,
+    nonce: NONCE,
   };
 };
 

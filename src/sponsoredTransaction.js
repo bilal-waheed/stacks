@@ -5,20 +5,22 @@ import {
 } from "@stacks/transactions";
 
 import { createTxOptions } from "./common.js";
+import { FEE, SPONSOR_KEY, SPONSOR_NONCE } from "./constants.js";
 
 export const sponsoredTransaction = async () => {
   // creating the txOptions object
   const txOptions = await createTxOptions();
-  delete txOptions.fee;
+
+  delete txOptions.fee; // FEE is added in the sponsorOptions
   txOptions.sponsored = true;
 
   const transaction = await makeSTXTokenTransfer(txOptions);
 
   const sponsorOptions = {
     transaction,
-    sponsorPrivateKey: process.argv[9],
-    fee: process.argv[6],
-    sponsorNonce: process.argv[10],
+    sponsorPrivateKey: SPONSOR_KEY,
+    fee: FEE,
+    sponsorNonce: SPONSOR_NONCE,
   };
 
   // sponsoring the transaction
