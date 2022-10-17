@@ -1,41 +1,46 @@
 import {
   makeSTXTokenTransfer,
   broadcastTransaction,
+  broadcastRawTransaction,
   AnchorMode,
   getAddressFromPrivateKey,
   getNonce,
   TransactionVersion,
 } from "@stacks/transactions";
+import {
+  AMOUNT,
+  NETWORK,
+  RECIPIENT,
+  SENDER_KEY,
+  FEE,
+  NONCE,
+} from "./constants.js";
 
-const calcNonce = async () => {
-  const network = process.argv[7];
+const getAddress = async () => {
   const address = await getAddressFromPrivateKey(
-    process.argv[4], //senderKey
-    network == "testnet"
+    SENDER_KEY,
+    NETWORK == "testnet"
       ? TransactionVersion.Testnet
       : TransactionVersion.Mainnet
   );
-  const nonceFromAddress = await getNonce(address, network);
-  const nonceFromCLI = Number(process.argv[8]);
+  return address;
+};
+
+const calcNonce = async () => {
+  const address = await getAddress();
+  const nonceFromAddress = await getNonce(address, NETWORK);
+  const nonceFromCLI = NONCE;
   return [nonceFromCLI, nonceFromAddress];
 };
 
 const createTxOptions = async () => {
-  // data from the command line
-  const recipient = process.argv[3];
-  const senderKey = process.argv[4];
-  const amount = BigInt(process.argv[5]);
-  const fee = BigInt(process.argv[6]);
-  const network = process.argv[7];
-  const nonce = BigInt(process.argv[8]);
-
   return {
-    recipient,
-    amount,
-    senderKey,
-    network,
+    recipient: RECIPIENT,
+    amount: AMOUNT,
+    senderKey: SENDER_KEY,
+    network: NETWORK,
     memo: "test transaction",
-    fee,
+    fee: FEE,
     anchormode: AnchorMode.Any,
     nonce,
   };
@@ -49,9 +54,18 @@ const sendTransaction = async (txOptions) => {
   return broadcastResponse;
 };
 
+export const sendRawTransaction = async (serializedArray) => {
+  const response = await broadcastRawTransaction(
+    serializedArray,
+    `https://stacks-node-api.${NETWORK}.stacks.co/v2/transactions`
+  );
+  return response;
+};
+
 const getMempoolData = async () => {
+  const address = await getAddress();
   const mempoolNonceData = await fetch(
-    "https://stacks-node-api.testnet.stacks.co/extended/v1/address/ST1P44DKMKA01XPCKEAGF8BAGXZF8MRKY2SF20B11/nonces"
+    `https://stacks-node-api.${NETWORK}.stacks.co/extended/v1/address/${address}/nonces`
   );
   const jsonData = await mempoolNonceData.json();
   return jsonData;
