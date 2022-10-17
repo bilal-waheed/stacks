@@ -20,17 +20,19 @@ const getRawTx = async (txid) => {
 };
 
 export const rbfTransaction = async () => {
-  const transactionData = await getRawTx(TXID);
+  const { payload, auth, anchorMode } = await getRawTx(TXID);
+  const { recipient, amount, memo } = payload;
+  const { nonce, fee } = auth.spendingCondition;
 
   const txOptions = {
-    recipient: addressToString(transactionData.payload.recipient.address),
-    amount: transactionData.payload.amount,
+    recipient: addressToString(recipient.address),
+    amount,
     senderKey: SENDER_KEY,
     network: NETWORK,
-    memo: transactionData.payload.memo.content.split("\x00")[0],
-    nonce: transactionData.auth.spendingCondition.nonce,
-    fee: transactionData.auth.spendingCondition.fee + BigInt(FEE_INCREMENT),
-    anchormode: transactionData.anchorMode,
+    memo: memo.content.split("\x00")[0],
+    nonce,
+    fee: fee + BigInt(FEE_INCREMENT),
+    anchormode: anchorMode,
   };
 
   const transaction = await makeSTXTokenTransfer(txOptions);
