@@ -16,6 +16,15 @@ import {
   NONCE,
 } from "./constants.js";
 
+import {
+  AMOUNT,
+  NETWORK,
+  RECIPIENT,
+  SENDER_KEY,
+  FEE,
+  NONCE,
+} from "./constants.js";
+
 const getAddress = async () => {
   const address = await getAddressFromPrivateKey(
     SENDER_KEY,
@@ -42,6 +51,7 @@ const createTxOptions = async () => {
     memo: "test transaction",
     fee: FEE,
     anchormode: AnchorMode.Any,
+    nonce: NONCE,
   };
 };
 

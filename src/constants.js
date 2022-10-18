@@ -6,7 +6,10 @@ export const SENDER_KEY = process.argv[5];
 export const AMOUNT = BigInt(process.argv[6]);
 export const FEE = process.argv[7] ? BigInt(process.argv[7]) : null;
 export const NONCE = process.argv[8] ? BigInt(process.argv[8]) : null;
-// rbf - specific exports
+// sponsor-specific exports
+export const SPONSOR_KEY = process.argv[9];
+export const SPONSOR_NONCE = process.argv[10] ? BigInt(process.argv[10]) : null;
+// rbf-specific exports
 export const TXID = process.argv[4];
 export const FEE_INCREMENT = process.argv[6];
 
