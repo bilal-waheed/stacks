@@ -7,6 +7,14 @@ import {
   getNonce,
   TransactionVersion,
 } from "@stacks/transactions";
+import {
+  AMOUNT,
+  NETWORK,
+  RECIPIENT,
+  SENDER_KEY,
+  FEE,
+  NONCE,
+} from "./constants.js";
 
 import {
   AMOUNT,

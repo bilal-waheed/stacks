@@ -38,3 +38,4 @@ Enter the command with the following syntax
 Enter the command with the following syntax
 
 `npm start sponsoredTransaction [network - mainnet | testnet] [recipient address] [sender's private key] [amount] [fee] [sender's nonce] [sponsor's private key] [sponsor's nonce]`
+
