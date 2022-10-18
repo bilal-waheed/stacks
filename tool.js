@@ -1,8 +1,9 @@
-import { stxTokenTransfer } from "./src/stxTokenTransfer.js";
-import { rbfTransaction } from "./src/rbfTransaction.js";
-import { dustTransaction } from "./src/dustTransaction.js";
-import { sponsoredTransaction } from "./src/sponsoredTransaction.js";
+import { stxTokenTransfer } from "./src/transactions/stxTokenTransfer.js";
+import { rbfTransaction } from "./src/transactions/rbfTransaction.js";
+import { dustTransaction } from "./src/transactions/dustTransaction.js";
+import { sponsoredTransaction } from "./src/transactions/sponsoredTransaction.js";
 import { CLI_ACTION } from "./src/constants.js";
+import { namePreorder } from "./src/bns/preorder.js";
 
 (async () => {
   switch (CLI_ACTION) {
@@ -20,6 +21,10 @@ import { CLI_ACTION } from "./src/constants.js";
 
     case "sponsoredTransaction":
       sponsoredTransaction();
+      break;
+
+    case "namePreorder":
+      namePreorder();
       break;
 
     default:

@@ -6,7 +6,10 @@ import {
   getAddressFromPrivateKey,
   getNonce,
   TransactionVersion,
+  TransactionSigner,
+  createStacksPrivateKey,
 } from "@stacks/transactions";
+import { StacksMainnet, StacksTestnet } from "@stacks/network";
 
 import {
   AMOUNT,
@@ -61,6 +64,18 @@ export const sendRawTransaction = async (serializedArray) => {
     `https://stacks-node-api.${NETWORK}.stacks.co/v2/transactions`
   );
   return response;
+};
+
+export const sendSignedTransaction = async (unsignedTx) => {
+  const signer = new TransactionSigner(unsignedTx);
+  signer.signOrigin(createStacksPrivateKey(SENDER_KEY));
+  return await broadcastTransaction(signer.transaction, NETWORK);
+};
+
+export const resolveNetworkFromCLI = async () => {
+  return NETWORK == "testnet"
+    ? await new StacksTestnet()
+    : await new StacksMainnet();
 };
 
 const getMempoolData = async () => {

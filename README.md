@@ -2,9 +2,9 @@
 
 Cli tool for making various transactions on Stacks networks, both mainnet and testnet.
 
-## Usage
-
 Clone the repository and run `npm install`
+
+## Transactions
 
 Four different transaction types can be sent using the tool.
 
@@ -38,3 +38,18 @@ Enter the command with the following syntax
 Enter the command with the following syntax
 
 `npm start sponsoredTransaction [network - mainnet | testnet] [recipient address] [sender's private key] [amount] [fee] [sender's nonce] [sponsor's private key] [sponsor's nonce]`
+
+## Blockchain Naming System (BNS)
+
+Four different transactions are included in this section.
+
+1. Name preorder
+2. Name register
+3. Name renewal
+4. Name transfer
+
+### 1. Name Preorder
+
+Enter the command with the following syntax
+
+`npm start namePreorder [network - mainnet | testnet] [salt] [sender's private key] [name] [stx to burn]`

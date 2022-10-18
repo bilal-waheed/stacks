@@ -4,8 +4,8 @@ import {
   addressToString,
 } from "@stacks/transactions";
 
-import { FEE_INCREMENT, NETWORK, SENDER_KEY, TXID } from "./constants.js";
-import { sendRawTransaction } from "./common.js";
+import { FEE_INCREMENT, NETWORK, SENDER_KEY, TXID } from "../constants.js";
+import { sendRawTransaction } from "../common.js";
 
 // Returns StacksTransaction object converted from raw transaction (bytes)
 const getRawTx = async (txid) => {

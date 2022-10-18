@@ -1,6 +1,6 @@
-import { createTxOptions, calcNonce, sendTransaction } from "./common.js";
+import { createTxOptions, calcNonce, sendTransaction } from "../common.js";
 
-export const stxTokenTransfer = async () => {
+export const dustTransaction = async () => {
   const txOptions = await createTxOptions();
 
   // broadcasting transaction
