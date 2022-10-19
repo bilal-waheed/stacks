@@ -53,3 +53,9 @@ Four different transactions are included in this section.
 Enter the command with the following syntax
 
 `npm start namePreorder [network - mainnet | testnet] [salt] [sender's private key] [name] [namespace] [stx to burn]`
+
+### 2. Name Register
+
+Enter the command with the following syntax
+
+`npm start nameRegister [network - mainnet | testnet] [salt] [sender's private key] [name] [namespace] [zonefile]`

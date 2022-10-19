@@ -1,9 +1,10 @@
+import { CLI_ACTION } from "./src/constants.js";
 import { stxTokenTransfer } from "./src/transactions/stxTokenTransfer.js";
 import { rbfTransaction } from "./src/transactions/rbfTransaction.js";
 import { dustTransaction } from "./src/transactions/dustTransaction.js";
 import { sponsoredTransaction } from "./src/transactions/sponsoredTransaction.js";
-import { CLI_ACTION } from "./src/constants.js";
 import { namePreorder } from "./src/bns/preorder.js";
+import { nameRegister } from "./src/bns/register.js";
 
 (async () => {
   switch (CLI_ACTION) {
@@ -25,6 +26,10 @@ import { namePreorder } from "./src/bns/preorder.js";
 
     case "namePreorder":
       namePreorder();
+      break;
+
+    case "nameRegister":
+      nameRegister();
       break;
 
     default:

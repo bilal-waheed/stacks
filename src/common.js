@@ -66,10 +66,10 @@ export const sendRawTransaction = async (serializedArray) => {
   return response;
 };
 
-export const sendSignedTransaction = async (unsignedTx) => {
+export const sendSignedTransaction = async (unsignedTx, attachment) => {
   const signer = new TransactionSigner(unsignedTx);
   signer.signOrigin(createStacksPrivateKey(SENDER_KEY));
-  return await broadcastTransaction(signer.transaction, NETWORK);
+  return await broadcastTransaction(signer.transaction, NETWORK, attachment);
 };
 
 export const resolveNetworkFromCLI = async () => {
