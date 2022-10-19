@@ -6,15 +6,10 @@ import {
   getAddressFromPrivateKey,
   getNonce,
   TransactionVersion,
+  TransactionSigner,
+  createStacksPrivateKey,
 } from "@stacks/transactions";
-import {
-  AMOUNT,
-  NETWORK,
-  RECIPIENT,
-  SENDER_KEY,
-  FEE,
-  NONCE,
-} from "./constants.js";
+import { StacksMainnet, StacksTestnet } from "@stacks/network";
 
 import {
   AMOUNT,
@@ -38,20 +33,20 @@ const getAddress = async () => {
 const calcNonce = async () => {
   const address = await getAddress();
   const nonceFromAddress = await getNonce(address, NETWORK);
-  const nonceFromCLI = NONCE;
+  const nonceFromCLI = BigInt(NONCE);
   return [nonceFromCLI, nonceFromAddress];
 };
 
 const createTxOptions = async () => {
   return {
     recipient: RECIPIENT,
-    amount: AMOUNT,
+    amount: BigInt(AMOUNT),
     senderKey: SENDER_KEY,
     network: NETWORK,
     memo: "test transaction",
-    fee: FEE,
+    fee: BigInt(FEE),
     anchormode: AnchorMode.Any,
-    nonce: NONCE,
+    nonce: BigInt(NONCE),
   };
 };
 
@@ -69,6 +64,18 @@ export const sendRawTransaction = async (serializedArray) => {
     `https://stacks-node-api.${NETWORK}.stacks.co/v2/transactions`
   );
   return response;
+};
+
+export const sendSignedTransaction = async (unsignedTx) => {
+  const signer = new TransactionSigner(unsignedTx);
+  signer.signOrigin(createStacksPrivateKey(SENDER_KEY));
+  return await broadcastTransaction(signer.transaction, NETWORK);
+};
+
+export const resolveNetworkFromCLI = async () => {
+  return NETWORK == "testnet"
+    ? await new StacksTestnet()
+    : await new StacksMainnet();
 };
 
 const getMempoolData = async () => {

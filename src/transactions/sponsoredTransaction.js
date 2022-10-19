@@ -4,8 +4,8 @@ import {
   sponsorTransaction,
 } from "@stacks/transactions";
 
-import { createTxOptions } from "./common.js";
-import { FEE, SPONSOR_KEY, SPONSOR_NONCE } from "./constants.js";
+import { createTxOptions } from "../common.js";
+import { FEE, SPONSOR_KEY, SPONSOR_NONCE } from "../constants.js";
 
 export const sponsoredTransaction = async () => {
   // creating the txOptions object
@@ -19,8 +19,8 @@ export const sponsoredTransaction = async () => {
   const sponsorOptions = {
     transaction,
     sponsorPrivateKey: SPONSOR_KEY,
-    fee: FEE,
-    sponsorNonce: SPONSOR_NONCE,
+    fee: BigInt(FEE),
+    sponsorNonce: BigInt(SPONSOR_NONCE),
   };
 
   // sponsoring the transaction
