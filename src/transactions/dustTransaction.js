@@ -1,4 +1,4 @@
-import { createTxOptions, calcNonce, sendTransaction } from "../common.js";
+import { createTxOptions, sendTransaction } from "../common.js";
 
 export const dustTransaction = async () => {
   const txOptions = await createTxOptions();
