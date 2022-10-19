@@ -1,7 +1,13 @@
 import { buildPreorderNameTx } from "@stacks/bns";
 import { publicKeyToString, pubKeyfromPrivKey } from "@stacks/transactions";
 
-import { BNS_NAME, STX_TO_BURN, SALT, SENDER_KEY } from "../constants.js";
+import {
+  BNS_NAME,
+  BNS_NAMESPACE,
+  STX_TO_BURN,
+  SALT,
+  SENDER_KEY,
+} from "../constants.js";
 import { sendSignedTransaction, resolveNetworkFromCLI } from "../common.js";
 
 export const namePreorder = async () => {
@@ -9,9 +15,9 @@ export const namePreorder = async () => {
   const network = await resolveNetworkFromCLI();
 
   const unsignedTx = await buildPreorderNameTx({
-    fullyQualifiedName: BNS_NAME,
+    fullyQualifiedName: `${BNS_NAME}.${BNS_NAMESPACE}`,
     salt: SALT,
-    stxToBurn: STX_TO_BURN,
+    stxToBurn: BigInt(STX_TO_BURN),
     publicKey,
     network,
   });

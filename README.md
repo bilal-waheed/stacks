@@ -52,4 +52,4 @@ Four different transactions are included in this section.
 
 Enter the command with the following syntax
 
-`npm start namePreorder [network - mainnet | testnet] [salt] [sender's private key] [name] [stx to burn]`
+`npm start namePreorder [network - mainnet | testnet] [salt] [sender's private key] [name] [namespace] [stx to burn]`

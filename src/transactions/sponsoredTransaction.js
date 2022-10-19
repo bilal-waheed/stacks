@@ -19,8 +19,8 @@ export const sponsoredTransaction = async () => {
   const sponsorOptions = {
     transaction,
     sponsorPrivateKey: SPONSOR_KEY,
-    fee: FEE,
-    sponsorNonce: SPONSOR_NONCE,
+    fee: BigInt(FEE),
+    sponsorNonce: BigInt(SPONSOR_NONCE),
   };
 
   // sponsoring the transaction

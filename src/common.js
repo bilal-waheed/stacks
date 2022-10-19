@@ -33,20 +33,20 @@ const getAddress = async () => {
 const calcNonce = async () => {
   const address = await getAddress();
   const nonceFromAddress = await getNonce(address, NETWORK);
-  const nonceFromCLI = NONCE;
+  const nonceFromCLI = BigInt(NONCE);
   return [nonceFromCLI, nonceFromAddress];
 };
 
 const createTxOptions = async () => {
   return {
     recipient: RECIPIENT,
-    amount: AMOUNT,
+    amount: BigInt(AMOUNT),
     senderKey: SENDER_KEY,
     network: NETWORK,
     memo: "test transaction",
-    fee: FEE,
+    fee: BigInt(FEE),
     anchormode: AnchorMode.Any,
-    nonce: NONCE,
+    nonce: BigInt(NONCE),
   };
 };
 
