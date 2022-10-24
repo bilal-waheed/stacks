@@ -5,6 +5,7 @@ import { dustTransaction } from "./src/transactions/dustTransaction.js";
 import { sponsoredTransaction } from "./src/transactions/sponsoredTransaction.js";
 import { namePreorder } from "./src/bns/preorder.js";
 import { nameRegister } from "./src/bns/register.js";
+import { nameTransfer } from "./src/bns/transfer.js";
 
 (async () => {
   switch (CLI_ACTION) {
@@ -30,6 +31,10 @@ import { nameRegister } from "./src/bns/register.js";
 
     case "nameRegister":
       nameRegister();
+      break;
+
+    case "nameTransfer":
+      nameTransfer();
       break;
 
     default:

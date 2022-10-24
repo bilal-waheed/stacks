@@ -22,8 +22,12 @@ export const SALT = process.argv[4];
 export const BNS_NAME = process.argv[6];
 export const BNS_NAMESPACE = process.argv[7] ? process.argv[7] : null;
 export const STX_TO_BURN = process.argv[8] ? process.argv[8] : null;
+
 // bns-name-regsiter specific export
 export const ZONE_FILE = process.argv[8] ? process.argv[8] : null;
+
+// bns-name-transfer specific exports
+export const NAME_RECIPIENT = process.argv[4];
 
 // * 4 and 6 indexes will have different values for RBF transactions.
 // ... only TXID/FEE_INCREMENT will be used in rbf transacations
