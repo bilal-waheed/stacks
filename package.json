@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@stacks/bns": "^5.0.1",
-    "@stacks/transactions": "^5.0.1"
+    "@stacks/bns": "^5.0.2",
+    "@stacks/transactions": "^5.0.2"
   }
 }

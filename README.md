@@ -59,3 +59,9 @@ Enter the command with the following syntax
 Enter the command with the following syntax
 
 `npm start nameRegister [network - mainnet | testnet] [salt] [sender's private key] [name] [namespace] [zonefile]`
+
+### 3. Name Transfer
+
+Enter the command with the following syntax
+
+`npm start nameTransfer [network - mainnet | testnet] [recipient's address] [sender's private key] [name] [namespace] [zonefile] `
